@@ -9,8 +9,11 @@ const config = {
       slategray: '#738290',
       powderblue: '#A1B5D8',
       babypowder: '#FFFCF7',
+      delftblue: '#23395B',
       nyanza: '#E4F0D0',
-      teagreen: '#C2D8B9'
+      teagreen: '#C2D8B9',
+      magnolia: '#ECE8EF',
+      aliceblue: '#E7F0FF'
     },
     extend: {
       backgroundImage: {
