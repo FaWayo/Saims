@@ -1,8 +1,22 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat, Raleway, Lato } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({
+  variable: "--header-font",
+  subsets: ["latin"]
+});
+
+const lato = Lato({
+  variable: "--body-font",
+  weight: '300',
+  subsets: ["latin"]
+});
+
+const raleway = Raleway({
+  variable: "--body-font2",
+  subsets: ["latin"]
+});
 
 export const metadata: Metadata = {
   title: 'Raffby Sales and Purchases Inventory',
@@ -15,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${montserrat.variable}${lato.variable}${raleway.variable}`}>
+      <body>{children}</body>
     </html>
   )
 }
