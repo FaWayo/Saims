@@ -3,19 +3,23 @@ import { Montserrat, Raleway, Lato } from 'next/font/google'
 import './globals.css'
 
 const montserrat = Montserrat({
-  variable: "--header-font",
-  subsets: ["latin"]
+  display: 'swap',
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  variable: '--font-montserrat'
 });
 
 const lato = Lato({
-  variable: "--body-font",
+  display: 'swap',
   weight: '300',
-  subsets: ["latin"]
+  subsets: ['latin'],
+  variable: '--font-lato'
 });
 
 const raleway = Raleway({
-  variable: "--body-font2",
-  subsets: ["latin"]
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-raleway'
 });
 
 export const metadata: Metadata = {
