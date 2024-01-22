@@ -9,24 +9,24 @@ const config = {
   ],
   theme: {
     colors: {
-      slategray: '#738290',
-      powderblue: '#A1B5D8',
-      babypowder: '#FFFCF7',
-      charcoal: '#313E50',
-      delftblue: '#23395B',
-      nyanza: '#E4F0D0',
-      teagreen: '#C2D8B9',
-      magnolia: '#ECE8EF',
-      transparent: 'transparent',
-      current: 'currentColor',
-      black: colors.black,
-      white: colors.white,
-      gray: colors.gray,
-      emerald: colors.emerald,
-      indigo: colors.indigo,
-      yellow: colors.yellow,
-      aliceblue: '#E7F0FF',
-      licroice: '#1F1300'
+      mainblue: "#5DA9E9",
+      lightgray: "#f2f2f2",
+      lightgray2: "#ABAFB1",
+      normaltext: "#5E6366",
+      headertext: "#2B2F32",
+      success: "#32936F",
+      error: "#3F57E77",
+      white: "#ffffff"
+    },
+    borderWidth: {
+      DEFAULT: '1px',
+      '0': '0',
+      '2': '2px',
+      '3': '3px',
+      '4': '4px',
+      '6': '6px',
+      '8': '8px',
+      '16': '26px'
     },
     extend: {
       backgroundImage: {
