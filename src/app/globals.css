@@ -1,10 +1,16 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
-.layer-blur {
-  backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.8);
+:root {
+  --gold: #FFD700;
+  --lightgray: #f2f2f2;
+  --tomatored: #FF6347;
+  --black: #2B2F32;
+  --lightgray2: #ABAFB1;
 }
 
+.line {
+  border: 1px solid var(--lightgray);
+}
 

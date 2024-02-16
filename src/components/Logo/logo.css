@@ -1,0 +1,14 @@
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    -webkit-text-stroke: 1px var(--tomatored);
+    padding-left: 0.5rem;
+    color: var(--gold);
+}
