@@ -1,0 +1,29 @@
+.input-cont {
+    display: flex;
+    border: 2px solid var(--lightgray);
+    width: 90%;
+    height: 3rem;
+    align-items: center;
+}
+
+.input-container {
+    width: 90%;
+    height: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-input {
+    height: 100%;
+    border: none;
+    margin-bottom: 0.5rem;
+}
+
+.input-label {
+    padding-top: 0.5rem;
+}
+
+::placeholder {
+    color: var(--lightgray2);
+    font-weight: 100;
+}

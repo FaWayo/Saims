@@ -16,7 +16,8 @@ const config = {
       headertext: "#2B2F32",
       success: "#32936F",
       error: "#3F57E77",
-      white: "#ffffff"
+      white: "#ffffff",
+      gold: "#FFD700"
     },
     borderWidth: {
       DEFAULT: '1px',
@@ -26,7 +27,8 @@ const config = {
       '4': '4px',
       '6': '6px',
       '8': '8px',
-      '16': '26px'
+      'auth-sm': '14px', 
+      'auth-lg': '50px'
     },
     extend: {
       backgroundImage: {

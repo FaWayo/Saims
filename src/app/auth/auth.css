@@ -1,0 +1,50 @@
+/* Layout */
+.auth-container {
+  margin: 0.5rem 0;
+  display: block;
+  color: var(--black);
+}
+
+.main-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.content-section {
+  border: 14px solid var(--lightgray);
+  margin: 0 1.25rem;
+  border-radius: 0.5rem;
+  flex-grow: 1;
+}
+
+/* Sign Up Page  */
+.content-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-header {
+  text-align: center;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+
+/* Input */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.input-icon {
+    padding: 0.5rem;
+    height: 16px;
+    width: 16px;
+}

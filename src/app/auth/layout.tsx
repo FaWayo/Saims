@@ -1,11 +1,24 @@
 import React from "react";
+import Logo from "@/components/Logo/logo";
+import "./auth.css";
+import "@/app/globals.css";
 
-function AuthLayout({ children }: { children: React.ReactNode }) {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="min-h-screen flex items-center justify-center border-r-8">
-         {children}
+    <main className="auth-container">
+      <nav>
+        <Logo />
+        <hr className="line" />
+      </nav>
+
+      <div className="main-section">
+        <div className="content-section">
+          {children}
+        </div>
+      </div>
+
     </main>
   );
-}
+};
 
 export default AuthLayout;

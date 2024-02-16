@@ -1,5 +1,5 @@
 "use client";
-import Input from "@/components/Input";
+import Input from "@/components/Input/input";
 import React, { useState } from "react";
 import { TbUserCog, TbLock } from "react-icons/tb";
 
@@ -8,33 +8,21 @@ function Login() {
   const [password, setPassword] = useState("")
 
   return (
-    <div className="bg-white flex flex-col justify-center rounded-lg border-16 border-lightgray w-2/4 p-10 gap-4">
-      <div className="font-header flex flex-col items-center justify-center gap-2">
-        <p className="font-bold text-2xl">Welcome Back!</p>
-        <p className="text-lg pb-6">Sign in to your account.</p>
+    <div className="mx-72">
+      <div className="flex flex-col justify-center items-center gap-3">
+        <p className="text-headertext font-header text-2xl font-bold">Welcome Back!</p>
+        <p className="text-normaltext pb-20">Sign in to your account.</p>
+      </div>
+      <div className="flex flex-col gap-3">
+        <Input label="Username" placeholder={"Enter your username"} id={""} icon={<TbUserCog />} value={userName} setValue={setUserName} />
+        <Input label="Password" placeholder={"Enter your password"} id={""} icon={<TbLock />} value={password} setValue={setPassword} />
       </div>
 
-      <div>
-        <Input
-          id="userName"
-          value={userName}
-          setValue={setUserName}
-          label="Username"
-          icon={<TbUserCog className="h-12" strokeWidth="2" />}
-          placeholder="Enter your username"
-        />
-      </div>
+      <button className="bg-mainblue">
+        Sign in
+      </button>
 
-      <div>
-        <Input
-          id="password"
-          value={password}
-          setValue={setPassword}
-          label="Password"
-          icon={<TbLock className="h-12" strokeWidth="2" />}
-          placeholder="Enter your password"
-        />
-      </div>
+
     </div>
   );
 }
