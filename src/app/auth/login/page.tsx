@@ -1,28 +1,54 @@
 "use client";
-import Input from "@/components/Input/input";
 import React, { useState } from "react";
-import { TbUserCog, TbLock } from "react-icons/tb";
+import Input from "@/components/Input/input";
+import Button from "@/components/Button/button";
+import "../auth.css";
+import { montserrat } from "@/app/fonts";
+import { FaRegUser } from "react-icons/fa";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 function Login() {
-  const [userName, setUserName] = useState("")
-  const [password, setPassword] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
-    <div className="mx-72">
-      <div className="flex flex-col justify-center items-center gap-3">
-        <p className="text-headertext font-header text-2xl font-bold">Welcome Back!</p>
-        <p className="text-normaltext pb-20">Sign in to your account.</p>
-      </div>
-      <div className="flex flex-col gap-3">
-        <Input label="Username" placeholder={"Enter your username"} id={""} icon={<TbUserCog />} value={userName} setValue={setUserName} />
-        <Input label="Password" placeholder={"Enter your password"} id={""} icon={<TbLock />} value={password} setValue={setPassword} />
-      </div>
+    <div className="content-main">
+      <header className="content-header">
+        <h1 className={`${montserrat.className} heading`}>Welcome Back !</h1>
+        <p className="sub-heading">Sign in to your account.</p>
+      </header>
 
-      <button className="bg-mainblue">
-        Sign in
-      </button>
+      <form className="auth-form">
+        <div className="inputs">
+          <Input
+            label={"Username"}
+            placeholder={"Enter your username"}
+            icon={<FaRegUser className="input-icon" />}
+            setValue={setUsername}
+            value={username}
+          />
 
+          <Input
+            label={"Password"}
+            placeholder={"Enter your password"}
+            icon={<RiLockPasswordLine className="input-icon" />}
+            setValue={setPassword}
+            value={password}
+          />
+          <p className="reset-text">
+            Forgotten Password? <span className="link-text">Reset</span>
+          </p>
+        </div>
 
+        <div className="auth-form-footer">
+          <Button label={"Sign In"} />
+
+          <p className="reset-text">
+            Contact administrator to <span className="link-text">Sign Up</span>{" "}
+            if you don't have an account.
+          </p>
+        </div>
+      </form>
     </div>
   );
 }

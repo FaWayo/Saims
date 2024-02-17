@@ -10,7 +10,7 @@ export const montserrat = Montserrat({
   
   export const lato = Lato({
     display: 'swap',
-    weight: '300',
+    weight: ['300', '700'],
     subsets: ['latin'],
     variable: '--font-lato'
   });

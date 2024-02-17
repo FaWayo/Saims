@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from "react";
-import { IconType } from "react-icons";
+import "./button.css"
 
 interface Props {
   label: string;
@@ -17,9 +17,9 @@ const Button: React.FC<Props> = ({
   icon
 }) => {
   return (
-    <button type={type} value={value} onClick={onClick}>
-      {icon}
-      {label}
+    <button className="mainbutton" onClick={onClick} type={type ? type : "button"} value={value}>
+        {icon && icon}
+        {label}
     </button>
   );
 };
