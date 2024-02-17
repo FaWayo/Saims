@@ -27,7 +27,7 @@ const Input = ({ label, placeholder, value, setValue, id, type, icon }: Props) =
       {/* <FaRegUser className="input-icon" /> */}
       <div className="input-container">
         <label className="input-label">{label}</label>
-        <input className="auth-input" placeholder={placeholder} value={value} id={id} type={type ? type : 'text'}/>
+        <input className="auth-input" placeholder={placeholder} value={value} id={id} type={type ? type : 'text'} onChange={handleChange}/>
       </div>
     </div>
   );

@@ -1,0 +1,21 @@
+.mainbutton {
+    background-color: var(--mainblue);
+    border: none;
+    color: white;
+    height: 2.8rem;
+    border-radius: 0.5rem; 
+    text-align: center;
+    text-decoration: none;
+    width: 90%;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  .mainbutton:hover {
+    box-shadow: 0 0 10px var(--mainblue);
+    background-color: var(--lightblue);
+    transition: background-color 0.5s ease;
+  }
