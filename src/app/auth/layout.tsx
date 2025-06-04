@@ -6,7 +6,7 @@ import "@/app/globals.css";
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="auth-container">
-      <nav>
+      <nav className="navbar">
         <Logo />
         <hr className="line" />
       </nav>

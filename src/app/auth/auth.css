@@ -13,14 +13,20 @@
 }
 
 .content-section {
-  border: 14px solid var(--lightgray);
+  /* border: 14px solid var(--lightgray); */
   margin: 0 1.25rem;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   padding: 150px 20px;
   flex-grow: 1;
+
 }
 
-/* Sign Up Page  */
+.navbar {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Pages  */
 .content-main {
     display: flex;
     flex-direction: column;
@@ -37,7 +43,7 @@
 }
 
 
-/* Input */
+/* Form */
 .auth-form {
     display: flex;
     flex-direction: column;
@@ -58,14 +64,13 @@
 }
 
 .link-text:hover {
-  border-bottom: 2px solid var(--mainblue);
-  transition: border-bottom 0.5s ease;
+  border-bottom: 1px solid var(--mainblue);
+  /* transition: border-bottom 0.5s ease; */
   margin-top: 10px;
 }
 
 .reset-text {
   font-size: 14px;
-  text-align: center;
 }
 
 .inputs {
@@ -73,7 +78,6 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-
 }
 
 .auth-form-footer {
@@ -81,8 +85,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-decoration: none;
+  color: var(--black);
 }
 
+.select-input {
+  height: 100%;
+}
+/* SIGN UP */
+
+.signup-inputs {
+  display: flex;
+  gap: 10px;
+} 
+/* Responsiveness */
 
 @media screen and (min-width: 800px) {
   .inputs {
@@ -94,9 +110,8 @@
   }
 
   .content-section {
-    padding: 20px 10px;
-    border: 8px solid var(--lightgray)
-  }
+    padding: 0px 0px;
+  }  
 }
 
 @media screen and (min-width: 1400px) {
@@ -105,11 +120,11 @@
   }
 
   .mainbutton {
-    width: 52%
+    width: 50%
   }
 
   .content-section {
-    padding: 100px 0px;
-    border: 8px solid var(--lightgray)
+    padding: 0px 0px;
   }
 }
+

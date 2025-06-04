@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: left;
     padding-left: 20px;
+    padding-bottom: 14px;
 }
 
 .logo-text {
@@ -12,4 +13,5 @@
     -webkit-text-stroke: 1px var(--tomatored);
     padding-left: 0.5rem;
     color: var(--gold);
+    padding-left: 20px;
 }

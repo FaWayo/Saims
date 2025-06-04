@@ -6,6 +6,7 @@ import "../auth.css";
 import { montserrat } from "@/app/fonts";
 import { FaRegUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
+import Link from "next/link";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -40,11 +41,14 @@ function Login() {
           </p>
         </div>
 
-        <div className="auth-form-footer">
-          <Button label={"Sign In"} />
+        <Button label={"Sign In"} />
 
+        <div>
           <p className="reset-text">
-            Contact administrator to <span className="link-text">Sign Up</span>{" "}
+            Contact administrator to{" "}
+            <Link className="auth-form-footer" href={"/auth/signup"}>
+              <span className="link-text">Sign Up</span>
+            </Link>{" "}
             if you don't have an account.
           </p>
         </div>
