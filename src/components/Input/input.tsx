@@ -1,5 +1,4 @@
 import React from "react";
-import { FaRegUser } from "react-icons/fa";
 import "./input.css"
 
 interface Props {
@@ -10,9 +9,9 @@ interface Props {
   icon: React.ReactNode;
   value?: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  
   error?: boolean;
   errorMessage?: string;
+
 }
 
 const Input = ({ label, placeholder, value, setValue, id, type, icon }: Props) => {
@@ -24,7 +23,6 @@ const Input = ({ label, placeholder, value, setValue, id, type, icon }: Props) =
   return (
     <div className="input-cont">
       {icon}
-      {/* <FaRegUser className="input-icon" /> */}
       <div className="input-container">
         <label className="input-label">{label}</label>
         <input className="auth-input" placeholder={placeholder} value={value} id={id} type={type ? type : 'text'} onChange={handleChange}/>
