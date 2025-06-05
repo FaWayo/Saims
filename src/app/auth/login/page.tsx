@@ -1,19 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import Input from "@/components/Input/input";
-import Button from "@/components/Button/button";
 import "../auth.css";
 import { montserrat } from "@/app/fonts";
 import { FaRegUser } from "react-icons/fa";
 import { RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
+import { Button } from "@/components/button";
+import { Input } from "@/components/input";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <div className="content-main">
+    <div className="content-main bg-mainblue">
       <header className="content-header">
         <h1 className={`${montserrat.className} heading`}>Welcome Back !</h1>
         <p className="sub-heading">Sign in to your account.</p>
@@ -22,18 +22,18 @@ function Login() {
       <form className="auth-form">
         <div className="inputs">
           <Input
-            label={"Username"}
+            // label={"Username"}
             placeholder={"Enter your username"}
-            icon={<FaRegUser className="input-icon" />}
-            setValue={setUsername}
+            // icon={<FaRegUser className="input-icon" />}
+            // setValue={setUsername}
             value={username}
           />
 
           <Input
-            label={"Password"}
+            // label={"Password"}
             placeholder={"Enter your password"}
-            icon={<RiLockPasswordLine className="input-icon" />}
-            setValue={setPassword}
+            // icon={<RiLockPasswordLine className="input-icon" />}
+            // setValue={setPassword}
             value={password}
           />
           <p className="reset-text">
@@ -41,7 +41,7 @@ function Login() {
           </p>
         </div>
 
-        <Button label={"Sign In"} />
+        <Button title={"Sign In"} />
 
         <div>
           <p className="reset-text">
