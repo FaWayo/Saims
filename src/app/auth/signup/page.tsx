@@ -1,12 +1,11 @@
 "use client";
-import Input from "@/components/Input/input";
 import React, { useState } from "react";
 import "../auth.css";
 import { montserrat } from "@/app/fonts";
 import { FaRegUser } from "react-icons/fa";
-import Button from "@/components/Button/button";
-import SelectBox from "@/components/SelectBox/selectbox";
 import Select, { SingleValue } from "react-select";
+import { Input } from "@/components/input";
+import { Button } from "@/components/button";
 
 function Signup() {
   const [role, setRole] = useState<SingleValue<{ label: string;  value: string; }>>();
@@ -31,26 +30,26 @@ function Signup() {
           {/* Component for dropdwown */}
           <div className="signup-inputs">
             <div style={{ width: "50%" }}>
-               <SelectBox
+               <Select
                 options={[
                   { label: "Accountant", value: "Accountant" },
                   { label: "Administrator", value: "Administrator" },
                   { label: "Salesperson", value: "Salesperson" },
                 ]}
                 placeholder="Select the user's role"
-                label="User role"
-                icon={<FaRegUser className="input-icon" />} 
+                //label="User role"
+                //icon={<FaRegUser className="input-icon" />} 
                 value={role} 
-                setValue={setRole}              
+                //setValue={setRole}              
                 /> 
             </div>
 
             <div style={{ width: "50%" }}>
               <Input
-                label={"Full Name"}
+                //label={"Full Name"}
                 placeholder={"Enter full name"}
-                icon={<FaRegUser className="input-icon" />}
-                setValue={setFullname}
+                //icon={<FaRegUser className="input-icon" />}
+                //setValue={setFullname}
                 value={fullname}
               />
             </div>
@@ -59,20 +58,20 @@ function Signup() {
           <div className="signup-inputs">
             <div style={{ width: "50%" }}>
               <Input
-                label={"User name"}
+                //label={"User name"}
                 placeholder={"Enter a valid username"}
-                icon={<FaRegUser className="input-icon" />}
-                setValue={setUsername}
+                //icon={<FaRegUser className="input-icon" />}
+                //setValue={setUsername}
                 value={username}
               />
             </div>
 
             <div style={{ width: "50%" }}>
               <Input
-                label={"Registration ID"}
+                //label={"Registration ID"}
                 placeholder={"Enter a valid ID number"}
-                icon={<FaRegUser className="input-icon" />}
-                setValue={setRegisterId}
+                //icon={<FaRegUser className="input-icon" />}
+                //setValue={setRegisterId}
                 value={registerId}
               />
             </div>
@@ -80,10 +79,10 @@ function Signup() {
 
           <div style={{ width: "50%" }}>
             <Input
-              label={"Phone Number"}
+              //label={"Phone Number"}
               placeholder={"Enter phone number"}
-              icon={<FaRegUser className="input-icon" />}
-              setValue={setPhonenumber}
+              //icon={<FaRegUser className="input-icon" />}
+              //setValue={setPhonenumber}
               value={phonenumber}
             />
           </div>
@@ -91,19 +90,19 @@ function Signup() {
           <div className="signup-inputs">
             <div style={{ width: "50%" }}>
               <Input
-                label={"Password"}
+                //label={"Password"}
                 placeholder={"Set a password"}
-                icon={<FaRegUser className="input-icon" />}
-                setValue={setPassword}
+                //icon={<FaRegUser className="input-icon" />}
+                //setValue={setPassword}
                 value={password}
               />
             </div>
             <div style={{ width: "50%" }}>
               <Input
-                label={"Confirm password"}
+                //label={"Confirm password"}
                 placeholder={"Re-enter password"}
-                icon={<FaRegUser className="input-icon" />}
-                setValue={setPassword2}
+                //icon={<FaRegUser className="input-icon" />}
+                //setValue={setPassword2}
                 value={password2}
               />
             </div>
@@ -111,7 +110,7 @@ function Signup() {
         </div>
 
         <div style={{ width: "50%", marginTop: "10px" }}>
-          <Button label={"Create Account"} />
+          <Button title={"Create Account"} />
         </div>
       </form>
     </div>
