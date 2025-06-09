@@ -1,0 +1,241 @@
+
+CREATE TABLE [User](
+	UserId INT PRIMARY KEY IDENTITY(1,1),
+	Email VARCHAR(100) NOT NULL,
+	Password VARCHAR(MAX) NOT NULL,
+	[FirstName] VARCHAR(100) NOT NULL,
+	LastName VARCHAR(100) NOT NULL,
+	Avatar VARCHAR(MAX),
+	IsActive BIT DEFAULT 1,
+	LastLogin DATETIME,
+	RoleId INT FOREIGN KEY REFERENCES dbo.Role(RoleId),
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId),
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME
+);
+GO
+
+CREATE TABLE [Role](
+	RoleId INT PRIMARY KEY IDENTITY(1,1),
+	[Name] VARCHAR(100) NOT NULL,
+	[Description] VARCHAR(MAX),
+	[Permissions] VARCHAR(MAX),
+	IsActive  BIT DEFAULT 1,
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME
+);
+GO
+
+CREATE TABLE [Company](
+	CompanyId INT PRIMARY KEY IDENTITY(1,1),
+	[Name] VARCHAR(100) NOT NULL,
+	BusinessTypeId INT FOREIGN KEY REFERENCES dbo.BusinessTypes(BusinessTypeId),
+	RegistrationNumber VARCHAR(100),
+	TinNumber VARCHAR(100),
+	Email VARCHAR(100),
+	Phone VARCHAR(100) NOT NULL,
+	Website VARCHAR(100),
+	[Address] VARCHAR(100),
+	RegionId INT FOREIGN KEY REFERENCES dbo.Regions(RegionId),
+	DigitalAddress VARCHAR(50),
+	Currency VARCHAR(20) DEFAULT 'GHS',
+	Timezone VARCHAR(100) DEFAULT 'GMT',
+	Logo VARCHAR(MAX),
+	PrimaryColor VARCHAR(50),
+	IsActive BIT DEFAULT 1,
+	SubscriptionTierId INT FOREIGN KEY REFERENCES dbo.Regions(RegionId)
+);
+GO
+
+CREATE TABLE [SubscriptionTiers](
+	SubscriptionTierId INT PRIMARY KEY IDENTITY(1,1),
+	[Name] VARCHAR(100)
+);
+GO
+
+CREATE TABLE [Regions](
+	RegionId INT PRIMARY KEY IDENTITY(1,1),
+	Name VARCHAR(250) NOT NULL
+);
+GO
+
+CREATE TABLE [BusinessTypes](
+	BusinessTypeId INT PRIMARY KEY IDENTITY(1,1),
+	[Name] VARCHAR(100) NOT NULL,
+	[Description] VARCHAR(MAX)
+); 
+GO
+
+CREATE TABLE [Product](
+	ProductId INT PRIMARY KEY IDENTITY(1,1),
+	[Name] VARCHAR(MAX) NOT NULL ,
+	Description VARCHAR(MAX),
+	SKU VARCHAR(MAX),
+	BarCode VARCHAR(MAX),
+	CategoryId INT FOREIGN KEY REFERENCES dbo.Categories(CategoryId),
+
+	CostPrice DECIMAL(20,2) NOT NULL,
+	SellingPrice DECIMAL(20, 2) NOT NULL,
+	TrackInventory BIT DEFAULT 0,
+	CurrentStock DECIMAL(10,3) DEFAULT 0,
+	MinStockLevel DECIMAL(10,3) DEFAULT 0,
+	MaxStockLevel DECIMAL(10,3) DEFAULT 0,
+	ReorderPoint DECIMAL(10,3) DEFAULT 0,
+
+	BaseUnit VARCHAR(50) FOREIGN KEY REFERENCES dbo.Units(Name),
+	PurchaseUnit VARCHAR(50) FOREIGN KEY REFERENCES dbo.Units(Name),
+	SalesUnit VARCHAR(50) FOREIGN KEY REFERENCES dbo.Units(Name),
+
+	UnitsPerPurchase DECIMAL(10,3) DEFAULT 1,
+	UnitPerSale DECIMAL(10,3),
+
+	Brand VARCHAR(100),
+	Model VARCHAR(100),
+	Color VARCHAR(50),
+	Size VARCHAR(50),
+	[Weight] DECIMAL(8,3),
+
+	[Images] VARCHAR(MAX),
+	Thumbnail VARCHAR(MAX),
+
+	IsActive BIT DEFAULT 1,
+	IsService BIT DEFAULT 0,
+	IsTaxable BIT DEFAULT 1,
+	TaxRate DECIMAL(5,4) DEFAULT 0.0000,
+
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE(),
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId)
+);
+GO
+--https://gist.github.com/acquahsamuel/7810ccdfaac2e2443131b99387298af8
+
+CREATE TABLE [Units](
+	UnitId INT PRIMARY KEY IDENTITY(1,1),
+	[Name] VARCHAR(50) NOT NULL UNIQUE
+);
+GO
+
+CREATE TABLE [Categories](
+	CategoryId INT PRIMARY KEY IDENTITY(1,1),
+	Name VARCHAR(200) NOT NULL 
+);
+GO
+
+CREATE TABLE [Suppliers](
+	SupplierId INT PRIMARY KEY IDENTITY(1,1),
+	Name VARCHAR(200) NOT NULL,
+	ContactPerson VARCHAR(200),
+	Email VARCHAR(200),
+	Phone VARCHAR(50),
+	Address VARCHAR(250),
+	City VARCHAR(100),
+	RegionId INT FOREIGN KEY REFERENCES dbo.Regions(RegionId),
+	Country VARCHAR(250),
+	PaymentTerms VARCHAR(100),
+	IsActive BIT DEFAULT 1,
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId),
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE [Customers](
+	CustomerId INT PRIMARY KEY IDENTITY(1,1),
+	Name VARCHAR(200),
+	Email VARCHAR(200),
+	Phone VARCHAR(50),
+	Address VARCHAR(250),
+	City VARCHAR(100),
+	RegionId INT FOREIGN KEY REFERENCES dbo.Regions(RegionId),
+	CustomerType VARCHAR(30) CHECK(CustomerType IN ('INDIVIDUAL', 'BUSINESS')) DEFAULT 'INDIVIDUAL',
+	IsActive BIT DEFAULT 1,
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE(),
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId)
+);
+GO
+
+CREATE TABLE [PurchaseOrders](
+	POrderId INT PRIMARY KEY IDENTITY(1,1),
+	POrderNum VARCHAR(100) UNIQUE NOT NULL,
+	SupplierId INT FOREIGN KEY REFERENCES dbo.Suppliers(SupplierId),
+	OrderDate DATETIME NOT NULL,
+	ExpectedDate DATETIME,
+	ReceivedDate DATETIME,
+	Status VARCHAR(100) CHECK(Status IN ('PENDING', 'ORDERED', 'RECEIVED','CANCELLED')),
+	SubTotal DECIMAL(12,2) DEFAULT 0,
+	TaxAmount DECIMAL(12,2) DEFAULT 0,
+	TotalAmount DECIMAL(12,2) DEFAULT 0,
+	Notes VARCHAR(250),
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId),
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE [PurchaseItems](
+	PItemId INT PRIMARY KEY IDENTITY(1,1),
+	ProductId INT FOREIGN KEY REFERENCES dbo.Product(ProductId) NOT NULL,
+	POrderId INT FOREIGN KEY REFERENCES dbo.PurchaseOrders(POrderId) NOT NULL,
+	QuantityOrdered DECIMAL(10,3) NOT NULL, --purchase units
+	QuantityReceived DECIMAL(10,3) DEFAULT 0, --purchase units
+	UnitCost DECIMAL(10,2) NOT NULL, --cost per purchase unit
+	TotalCost DECIMAL(12,2),
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE [SalesOrders](
+	SOrderId INT PRIMARY KEY IDENTITY(1,1),
+	SOrderNum VARCHAR(100) UNIQUE NOT NULL,
+	CustomerId INT FOREIGN KEY REFERENCES dbo.Customers(CustomerId),
+	OrderDate DATETIME DEFAULT GETDATE(),
+	DeliveryDate DATETIME,
+	[Status] VARCHAR(100) CHECK(Status IN ('PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED', 'CANCELLED')),
+	SubTotal DECIMAL(12,2) DEFAULT 0,
+	DiscountAmount DECIMAL(12,2) DEFAULT 0,
+	TaxAmount DECIMAL(12,2) DEFAULT 0,
+	TotalAmount DECIMAL(12,2) DEFAULT 0,
+	PaymentStatus VARCHAR(100) CHECK(PaymentStatus IN ('PENDING', 'PARTIAL', 'PAID')),
+	Notes VARCHAR(250),
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId),
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE [SaleItems](
+	SItemId INT PRIMARY KEY IDENTITY(1,1),
+	SOrderId INT FOREIGN KEY REFERENCES dbo.SalesOrders(SOrderId) NOT NULL,
+	ProductId INT FOREIGN KEY REFERENCES dbo.Product(ProductId) NOT NULL,
+	Quantity DECIMAL(10,3) NOT NULL,
+	UnitPrice DECIMAL(10,2) NOT NULL,
+	DiscountPercent DECIMAL(5,2) DEFAULT 0,
+	TaxRate DECIMAL(5,4) DEFAULT 0,
+	LineTotal DECIMAL(12,2) NOT NULL,
+	CreatedAt DATETIME DEFAULT GETDATE(),
+	UpdatedAt DATETIME DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE [InventoryLogs](
+	LogId INT PRIMARY KEY IDENTITY(1,1),
+	ProductId INT FOREIGN KEY REFERENCES dbo.Product(ProductId) NOT NULL,
+	TransactionType VARCHAR(100) CHECK(TransactionType IN ('PURCHASE', 'SALE', 'ADJUSTMENT', 'TRANSFER', 'RETURN')),
+	ReferenceType VARCHAR(100) CHECK(ReferenceType IN ('PURCHASE_ORDER', 'SALES_ORDER', 'MANUAL_ADJUSTMENT', 'STOCK_TRANSFER')),
+	ReferenceId VARCHAR(50),
+	
+	QuantityBefore DECIMAL(10,3) NOT NULL,
+	QuantityChange DECIMAL(10,3) NOT NULL,
+	QuantityAfter DECIMAL(10,3) NOT NULL,
+
+	UnitCost DECIMAL(10,2),
+	Notes VARCHAR(MAX),
+	TransactionDate DATETIME DEFAULT GETDATE(),
+	CreatedBy VARCHAR(200),
+	CompanyId INT FOREIGN KEY REFERENCES dbo.Company(CompanyId) NOT NULL,
+);
+GO
+

@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "../auth.css";
 import { montserrat } from "@/app/fonts";
-import { FaRegUser } from "react-icons/fa";
-import { RiLockPasswordLine } from "react-icons/ri";
 import Link from "next/link";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
@@ -13,14 +10,14 @@ function Login() {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="content-main bg-mainblue">
-      <header className="content-header">
-        <h1 className={`${montserrat.className} heading`}>Welcome Back !</h1>
-        <p className="sub-heading">Sign in to your account.</p>
+    <div className="">
+      <header className="r">
+        <h1 className={`${montserrat.className}`}>Welcome Back !</h1>
+        <p className="">Sign in to your account.</p>
       </header>
 
-      <form className="auth-form">
-        <div className="inputs">
+      <form className="">
+        <div className="">
           <Input
             // label={"Username"}
             placeholder={"Enter your username"}
@@ -44,7 +41,7 @@ function Login() {
         <Button title={"Sign In"} />
 
         <div>
-          <p className="reset-text">
+          <p className="">
             Contact administrator to{" "}
             <Link className="auth-form-footer" href={"/auth/signup"}>
               <span className="link-text">Sign Up</span>
