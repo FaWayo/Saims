@@ -1,22 +1,14 @@
 import React from "react";
 import Logo from "@/components/Logo/logo";
-import "./auth.css";
-import "@/app/globals.css";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="auth-container">
-      <nav className="navbar">
+    <main className="h-full p-5">
+      <nav className="border-b border-lightgray">
         <Logo />
-        <hr className="line" />
       </nav>
 
-      <div className="main-section">
-        <div className="content-section">
-          {children}
-        </div>
-      </div>
-
+      <div className="">{children}</div>
     </main>
   );
 };

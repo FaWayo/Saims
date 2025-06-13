@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
+    "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "^6.9.0",
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "@types/mssql": "^9.1.7",
@@ -23,9 +25,10 @@
     "prisma": "^6.9.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^4.12.0",
+    "react-hook-form": "^7.57.0",
     "react-select": "^5.8.0",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.0",
+    "zod": "^3.25.63"
   },
   "devDependencies": {
     "@types/node": "^20",
