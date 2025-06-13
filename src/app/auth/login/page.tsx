@@ -10,46 +10,65 @@ function Login() {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="">
-      <header className="r">
-        <h1 className={`${montserrat.className}`}>Welcome Back !</h1>
-        <p className="">Sign in to your account.</p>
-      </header>
-
-      <form className="">
-        <div className="">
-          <Input
-            // label={"Username"}
-            placeholder={"Enter your username"}
-            // icon={<FaRegUser className="input-icon" />}
-            // setValue={setUsername}
-            value={username}
-          />
-
-          <Input
-            // label={"Password"}
-            placeholder={"Enter your password"}
-            // icon={<RiLockPasswordLine className="input-icon" />}
-            // setValue={setPassword}
-            value={password}
-          />
-          <p className="reset-text">
-            Forgotten Password? <span className="link-text">Reset</span>
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
+      <div className="w-full max-w-sm sm:max-w-md space-y-6 bg-white p-6 sm:p-8 rounded-lg shadow-md">
+        <header className="text-center space-y-2">
+          <h1
+            className={`${montserrat.className} text-2xl sm:text-3xl font-bold text-gray-900`}
+          >
+            Welcome Back
+          </h1>
+          <p className="text-sm sm:text-base text-gray-600">
+            Sign in to your account.
           </p>
-        </div>
+        </header>
 
-        <Button title={"Sign In"} />
+        <form className="space-y-6">
+          <div className="space-y-4">
+            <Input
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full"
+            />
 
-        <div>
-          <p className="">
-            Contact administrator to{" "}
-            <Link className="auth-form-footer" href={"/auth/signup"}>
-              <span className="link-text">Sign Up</span>
-            </Link>{" "}
-            if you don't have an account.
-          </p>
-        </div>
-      </form>
+            <Input
+              placeholder="Enter your password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full"
+            />
+
+            <p className="text-right text-sm">
+              <span className="text-gray-600">Forgotten Password? </span>
+              <button
+                type="button"
+                className="text-primary hover:cursor-pointer hover:text-primary/90 font-bold underline focus:outline-none rounded"
+              >
+                Reset
+              </button>
+            </p>
+          </div>
+
+          <Button className="w-full py-3 text-base sm:text-lg font-medium">
+            Sign In
+          </Button>
+
+          <div className="text-center">
+            <p className="text-sm sm:text-base text-gray-600">
+              Sign up{" "}
+              <Link
+                className="text-primary hover:cursor-pointer hover:text-primary/90 font-bold underline focus:outline-none rounded"
+                href="/auth/signup"
+              >
+                here
+              </Link>{" "}
+              if you don't have an account.
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

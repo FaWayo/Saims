@@ -10,8 +10,7 @@
     font-size: 1.25rem;
     line-height: 1.75rem;
     font-weight: 700;
-    -webkit-text-stroke: 1px var(--tomatored);
+    -webkit-text-stroke: 1px #0D3B66;
     padding-left: 0.5rem;
-    color: var(--gold);
-    padding-left: 20px;
+    color: #0D3B66;
 }
