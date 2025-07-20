@@ -44,7 +44,7 @@ function Login() {
               <span className="text-gray-600">Forgotten Password? </span>
               <button
                 type="button"
-                className="text-primary hover:cursor-pointer hover:text-primary/90 font-bold underline focus:outline-none rounded"
+                className="text-vividskyblue hover:cursor-pointer hover:text-vividskyblue/90 font-bold focus:outline-none rounded"
               >
                 Reset
               </button>
@@ -56,10 +56,10 @@ function Login() {
           </Button>
 
           <div className="text-center">
-            <p className="text-sm sm:text-base text-gray-600">
+            <p className="text-sm text-gray-600">
               Sign up{" "}
               <Link
-                className="text-primary hover:cursor-pointer hover:text-primary/90 font-bold underline focus:outline-none rounded"
+                className="text-vividskyblue hover:cursor-pointer hover:text-vividskyblue/90 font-bold focus:outline-none rounded"
                 href="/auth/signup"
               >
                 here

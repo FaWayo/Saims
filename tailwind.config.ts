@@ -32,6 +32,7 @@ const config = {
         error: "#3F57E77",
         white: "#ffffff",
         gold: "#FFD700",
+        vividskyblue: "#5BC3EB"
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

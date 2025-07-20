@@ -51,13 +51,13 @@ export const signupSchema = z
     // Step 1: Personal Information
     firstName: z
       .string()
-      .min(2, "First name must be at least 2 characters")
+      .min(1, "First name is required")
       .max(50, "First name cannot exceed 50 characters")
       .regex(/^[a-zA-Z\s]+$/, "First name can only contain letters and spaces"),
 
     lastName: z
       .string()
-      .min(2, "Last name must be at least 2 characters")
+      .min(1, "Last name is required")
       .max(50, "Last name cannot exceed 50 characters")
       .regex(/^[a-zA-Z\s]+$/, "Last name can only contain letters and spaces"),
 
