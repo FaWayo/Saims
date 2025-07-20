@@ -25,9 +25,9 @@ function ProgressStepper({steps, currentStep, isStepComplete}: Props) {
                       w-10 h-10 rounded-full flex items-center justify-center border-4 transition-all duration-300
                       ${
                         isCompleted
-                          ? "bg-green-800 border-green-800 text-white"
+                          ? "bg-black border-black text-white"
                           : isActive
-                          ? "bg-primary border-primary text-white"
+                          ? "bg-gray-300 border-gray-400 text-white"
                           : "bg-white border-gray-300 text-gray-400"
                       }
                     `}
@@ -41,7 +41,7 @@ function ProgressStepper({steps, currentStep, isStepComplete}: Props) {
                 <div className="mt-3 text-center">
                   <p
                     className={`font-semibold ${
-                      isActive ? "text-primary" : isCompleted ? "text-green-800" : "text-gray-600"
+                      isActive ? "text-black" : isCompleted ? "text-black" : "text-gray-600"
                     }`}
                   >
                     {step.title}
@@ -56,7 +56,7 @@ function ProgressStepper({steps, currentStep, isStepComplete}: Props) {
                 <div
                   className={`
                       h-0.5 w-24 mx-8 mt-8 rounded transition-all duration-300
-                      ${isCompleted ? "bg-green-800" : "bg-gray-200"}
+                      ${isCompleted ? "bg-black" : "bg-gray-200"}
                     `}
                 />
               )}

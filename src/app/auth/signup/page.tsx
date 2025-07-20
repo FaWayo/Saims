@@ -1,6 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import {
+  ControllerFieldState,
+  ControllerRenderProps,
+  FieldValues,
+  useForm,
+  UseFormStateReturn,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ChevronLeft,
@@ -28,13 +34,27 @@ import {
 
 import { Input } from "@/components/input";
 import { Textarea } from "@/components/textarea";
-import { steps, businessTypes, regions, currencies, signupSchema } from "./utils";
+import {
+  steps,
+  businessTypes,
+  regions,
+  currencies,
+  signupSchema,
+} from "./utils";
 import z from "zod";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage, FormDescription } from "@/components/form";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  FormDescription,
+} from "@/components/form";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  
+
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -56,20 +76,32 @@ const Signup = () => {
       currency: "",
       logo: null,
     },
-    mode: "onChange"
+    mode: "onChange",
   });
 
   const nextStep = async () => {
     let fieldsToValidate: (keyof SignUpData)[] = [];
-    
+
     if (currentStep === 1) {
-      fieldsToValidate = ["firstName", "lastName", "email", "password", "confirmPassword"];
+      fieldsToValidate = [
+        "firstName",
+        "lastName",
+        "email",
+        "password",
+        "confirmPassword",
+      ];
     } else if (currentStep === 2) {
-      fieldsToValidate = ["companyName", "businessType", "tinNumber", "companyEmail", "currency"];
+      fieldsToValidate = [
+        "companyName",
+        "businessType",
+        "tinNumber",
+        "companyEmail",
+        "currency",
+      ];
     }
-    
+
     const isValid = await form.trigger(fieldsToValidate);
-    
+
     if (isValid && currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
@@ -89,7 +121,7 @@ const Signup = () => {
   const isStepComplete = (stepId: number) => {
     const values = form.getValues();
     const errors = form.formState.errors;
-    
+
     if (stepId === 1) {
       return (
         values.firstName &&
@@ -119,6 +151,20 @@ const Signup = () => {
       );
     }
     return false;
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      console.error("Select a file");
+      return;
+    }
+    const file = e.target.files[0];
+    if (file) {
+      // Use form.setValue to update the form state
+      form.setValue("logo", file);
+      // Trigger validation for the logo field
+      form.trigger("logo");
+    }
   };
 
   return (
@@ -165,9 +211,12 @@ const Signup = () => {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Name *</FormLabel>
+                          <FormLabel required>First Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter your first name" {...field} />
+                            <Input
+                              placeholder="Enter your first name"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -179,9 +228,12 @@ const Signup = () => {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last Name *</FormLabel>
+                          <FormLabel required>Last Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter your last name" {...field} />
+                            <Input
+                              placeholder="Enter your last name"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -194,9 +246,13 @@ const Signup = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email Address *</FormLabel>
+                        <FormLabel required>Email Address</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="Enter your email address" {...field} />
+                          <Input
+                            type="email"
+                            placeholder="Enter your email address"
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -209,13 +265,14 @@ const Signup = () => {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password *</FormLabel>
+                          <FormLabel required>Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="Create a strong password" {...field} />
+                            <Input
+                              type="password"
+                              placeholder="Create a strong password"
+                              {...field}
+                            />
                           </FormControl>
-                          <FormDescription>
-                            Must contain at least 8 characters with uppercase, lowercase, number, and special character
-                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -226,9 +283,13 @@ const Signup = () => {
                       name="confirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Confirm Password *</FormLabel>
+                          <FormLabel required>Confirm Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="Confirm your password" {...field} />
+                            <Input
+                              type="password"
+                              placeholder="Confirm your password"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -258,7 +319,10 @@ const Signup = () => {
                         <FormItem>
                           <FormLabel>Company Name *</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter company name" {...field} />
+                            <Input
+                              placeholder="Enter company name"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -270,8 +334,11 @@ const Signup = () => {
                       name="businessType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Business Type *</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormLabel required>Business Type</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select business type" />
@@ -293,7 +360,6 @@ const Signup = () => {
                     />
                   </div>
 
-                  {/* Continue with other fields... */}
                   <div className="grid md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
@@ -302,7 +368,10 @@ const Signup = () => {
                         <FormItem>
                           <FormLabel>Registration Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter registration number" {...field} />
+                            <Input
+                              placeholder="Enter registration number"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -324,21 +393,210 @@ const Signup = () => {
                     />
                   </div>
 
-                  {/* Add remaining fields following the same pattern */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="companyEmail"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="company@example.com"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone Number</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="tel"
+                              placeholder="+233 XX XXX XXXX"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      name={"website"}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Website</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="url"
+                              placeholder="https://www.yourcompany.com"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      name={"address"}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Address</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Enter your business address"
+                              className="resize-none"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      name={"region"}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Region</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select region" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                {regions.map((region) => (
+                                  <SelectItem key={region} value={region}>
+                                    {region}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      name={"gps"}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>GPS Coordinates</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Input
+                                className="pl-10"
+                                placeholder="GPS coordinates"
+                                {...field}
+                              />
+                              <MapPin className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 pointer-events-none" />
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <FormField
+                      name={"currency"}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel required>Currency</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            value={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select currency" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectGroup>
+                                {currencies.map((currency) => (
+                                  <SelectItem
+                                    key={currency.code}
+                                    value={currency.code}
+                                  >
+                                    {currency.code} - {currency.name}
+                                  </SelectItem>
+                                ))}
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      name={"logo"}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company Logo</FormLabel>
+                          <FormControl>
+                            <FileUpload
+                              value={field.value}
+                              handleFileUpload={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                  field.onChange(file);
+                                  form.trigger("logo");
+                                }
+                              }}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
               )}
 
-              {/* Navigation Buttons */}
               <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-200">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={prevStep}
-                  disabled={currentStep === 1}
-                >
-                  <ChevronLeft className="w-5 h-5 mr-2" />
-                  Previous
-                </Button>
+                {currentStep !== 1 ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={prevStep}
+                    disabled={currentStep === 1}
+                    className="disabled:cursor-not-allowed"
+                  >
+                    <ChevronLeft className="w-5 h-5 mr-2" />
+                    Previous
+                  </Button>
+                ) : (
+                  <div></div>
+                )}
 
                 <div className="flex items-center space-x-2">
                   {steps.map((_, index) => (
@@ -347,7 +605,9 @@ const Signup = () => {
                       className={`
                         w-2 h-2 rounded-full transition-all
                         ${
-                          index + 1 === currentStep ? "bg-primary" : "bg-gray-300"
+                          index + 1 === currentStep
+                            ? "bg-vividskyblue"
+                            : "bg-gray-300"
                         }
                       `}
                     />
@@ -360,8 +620,8 @@ const Signup = () => {
                     <ChevronRight className="w-5 h-5 ml-2" />
                   </Button>
                 ) : (
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     size="lg"
                     disabled={!form.formState.isValid}
                   >
@@ -373,7 +633,6 @@ const Signup = () => {
           </Form>
         </div>
 
-        {/* Footer */}
         <div className="text-center mt-8 text-gray-500">
           <p>
             Already have an account?{" "}
