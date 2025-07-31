@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createUser } from "@/lib/auth"
 import { z } from "zod"
 import { signupSchema } from "@/app/auth/signup/utils"
 
