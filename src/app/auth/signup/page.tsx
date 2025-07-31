@@ -104,15 +104,15 @@ const Signup = () => {
     //2. insert into users table
   };
 
-  const getBusinessTypes = async () => {
-   return await db.select().from(typeBusinesses)
-  }
+  // const getBusinessTypes = async () => {
+  //  return await db.select().from(typeBusinesses)
+  // }
 
-  const getRegions = async () => {
-   return await db.select().from(regions)
-  }
+  // const getRegions = async () => {
+  //  return await db.select().from(regions)
+  // }
 
-  console.log(getBusinessTypes(), getRegions(), 'HERE')
+  // console.log(getBusinessTypes(), getRegions(), 'HERE')
 
   const isStepComplete = (stepId: number) => {
     const values = form.getValues();
