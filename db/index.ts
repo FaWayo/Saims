@@ -8,6 +8,6 @@ const pool = new Pool({
 
 export const db = drizzle({ client: pool })
 
-const result = await db.execute('select 1');
+//const result = await db.execute('select 1');
 
-console.log(result, 'result from connection')
+//console.log(result, 'result from connection')

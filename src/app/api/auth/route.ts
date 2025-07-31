@@ -8,34 +8,34 @@ export async function POST(request: NextRequest) {
     
     const validatedData = signupSchema.parse(body)
     
-    const result = await createUser({
-      firstName: validatedData.firstName,
-      lastName: validatedData.lastName,
-      email: validatedData.email,
-      password: validatedData.password,
-      companyName: validatedData.companyName,
-      businessType: validatedData.businessType,
-      currency: validatedData.currency,
-    })
+    // const result = await createUser({
+    //   firstName: validatedData.firstName,
+    //   lastName: validatedData.lastName,
+    //   email: validatedData.email,
+    //   password: validatedData.password,
+    //   companyName: validatedData.companyName,
+    //   businessType: validatedData.businessType,
+    //   currency: validatedData.currency,
+    // })
 
     // await sendVerificationEmail(result.user.email, result.user.id)
 
-    return NextResponse.json(
-      {
-        message: "Account created successfully",
-        user: {
-          id: result.user.id,
-          email: result.user.email,
-          firstName: result.user.firstName,
-          lastName: result.user.lastName,
-        },
-        company: {
-          id: result.company.id,
-          name: result.company.name,
-        }
-      },
-      { status: 201 }
-    )
+    // return NextResponse.json(
+    //   {
+    //     message: "Account created successfully",
+    //     user: {
+    //       id: result.user.id,
+    //       email: result.user.email,
+    //       firstName: result.user.firstName,
+    //       lastName: result.user.lastName,
+    //     },
+    //     company: {
+    //       id: result.company.id,
+    //       name: result.company.name,
+    //     }
+    //   },
+    //   { status: 201 }
+    // )
   } catch (error) {
     console.error("Signup error:", error)
     
