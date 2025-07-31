@@ -1,27 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import {
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldValues,
-  useForm,
-  UseFormStateReturn,
+  useForm
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ChevronLeft,
-  ChevronRight,
-  User,
-  Building2,
-  Check,
-  Upload,
-  MapPin,
+  ChevronRight
 } from "lucide-react";
 import { SignUpData, Step } from "./types";
 import ProgressStepper from "@/components/stepper/ProgressStepper";
 import { montserrat } from "@/app/fonts";
 import { Button } from "@/components/button";
-import FileUpload from "@/components/file-upload";
 import Link from "next/link";
 import {
   Select,
@@ -33,11 +23,9 @@ import {
 } from "@/components/select";
 
 import { Input } from "@/components/input";
-import { Textarea } from "@/components/textarea";
 import {
   steps,
-  businessTypes,
-  regions,
+ businessTypes,
   currencies,
   signupSchema,
 } from "./utils";
@@ -48,9 +36,10 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormMessage,
-  FormDescription,
+  FormMessage
 } from "@/components/form";
+import { db } from "../../../../db";
+import { NewCompany, businessTypes as typeBusinesses, regions } from "../../../../db/schema/auth";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -102,12 +91,28 @@ const Signup = () => {
     }
   };
 
-  const onSubmit = (data: z.infer<typeof signupSchema>) => {
+  const onSubmit = async (data: z.infer<typeof signupSchema>) => {
     console.log("Form submitted:", data);
-    //TODO: Handle form submission - redirect to complete profile or 2FA setup
+
+    //1. insert into companies table, return the id
+    // const company: NewCompany = {
+    //   name: data?.companyName,
+    //   business_type_id: data?.businessType
+    // }
+    // await db.insert(users)
+
+    //2. insert into users table
   };
 
-  console.log(form.formState.isValid, 'is valid', form.formState)
+  const getBusinessTypes = async () => {
+   return await db.select().from(typeBusinesses)
+  }
+
+  const getRegions = async () => {
+   return await db.select().from(regions)
+  }
+
+  console.log(getBusinessTypes(), getRegions(), 'HERE')
 
   const isStepComplete = (stepId: number) => {
     const values = form.getValues();
@@ -390,10 +395,9 @@ const Signup = () => {
                       key={index}
                       className={`
                         w-2 h-2 rounded-full transition-all
-                        ${
-                          index + 1 === currentStep
-                            ? "bg-vividskyblue"
-                            : "bg-gray-300"
+                        ${index + 1 === currentStep
+                          ? "bg-vividskyblue"
+                          : "bg-gray-300"
                         }
                       `}
                     />
