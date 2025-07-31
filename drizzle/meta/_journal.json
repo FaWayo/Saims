@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1753794763377,
+      "tag": "0000_condemned_gamma_corps",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1753813397028,
+      "tag": "0001_mean_typhoid_mary",
+      "breakpoints": true
+    }
+  ]
+}

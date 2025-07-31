@@ -1,27 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import {
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldValues,
-  useForm,
-  UseFormStateReturn,
+  useForm
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ChevronLeft,
-  ChevronRight,
-  User,
-  Building2,
-  Check,
-  Upload,
-  MapPin,
+  ChevronRight
 } from "lucide-react";
 import { SignUpData, Step } from "./types";
 import ProgressStepper from "@/components/stepper/ProgressStepper";
 import { montserrat } from "@/app/fonts";
 import { Button } from "@/components/button";
-import FileUpload from "@/components/file-upload";
 import Link from "next/link";
 import {
   Select,
@@ -33,11 +23,9 @@ import {
 } from "@/components/select";
 
 import { Input } from "@/components/input";
-import { Textarea } from "@/components/textarea";
 import {
   steps,
-  businessTypes,
-  regions,
+ businessTypes,
   currencies,
   signupSchema,
 } from "./utils";
@@ -48,9 +36,10 @@ import {
   FormItem,
   FormLabel,
   FormControl,
-  FormMessage,
-  FormDescription,
+  FormMessage
 } from "@/components/form";
+import { db } from "../../../../db";
+import { NewCompany, businessTypes as typeBusinesses, regions } from "../../../../db/schema/auth";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -65,16 +54,7 @@ const Signup = () => {
       confirmPassword: "",
       companyName: "",
       businessType: "",
-      registrationNumber: "",
-      tinNumber: "",
-      companyEmail: "",
-      phone: "",
-      website: "",
-      address: "",
-      region: "",
-      gps: "",
       currency: "",
-      logo: null,
     },
     mode: "onChange",
   });
@@ -94,8 +74,6 @@ const Signup = () => {
       fieldsToValidate = [
         "companyName",
         "businessType",
-        "tinNumber",
-        "companyEmail",
         "currency",
       ];
     }
@@ -113,10 +91,28 @@ const Signup = () => {
     }
   };
 
-  const onSubmit = (data: z.infer<typeof signupSchema>) => {
+  const onSubmit = async (data: z.infer<typeof signupSchema>) => {
     console.log("Form submitted:", data);
-    //TODO: Handle form submission
+
+    //1. insert into companies table, return the id
+    // const company: NewCompany = {
+    //   name: data?.companyName,
+    //   business_type_id: data?.businessType
+    // }
+    // await db.insert(users)
+
+    //2. insert into users table
   };
+
+  // const getBusinessTypes = async () => {
+  //  return await db.select().from(typeBusinesses)
+  // }
+
+  // const getRegions = async () => {
+  //  return await db.select().from(regions)
+  // }
+
+  // console.log(getBusinessTypes(), getRegions(), 'HERE')
 
   const isStepComplete = (stepId: number) => {
     const values = form.getValues();
@@ -140,31 +136,13 @@ const Signup = () => {
       return (
         values.companyName &&
         values.businessType &&
-        values.companyEmail &&
-        values.tinNumber &&
         values.currency &&
         !errors.companyName &&
         !errors.businessType &&
-        !errors.companyEmail &&
-        !errors.tinNumber &&
         !errors.currency
       );
     }
     return false;
-  };
-
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      console.error("Select a file");
-      return;
-    }
-    const file = e.target.files[0];
-    if (file) {
-      // Use form.setValue to update the form state
-      form.setValue("logo", file);
-      // Trigger validation for the logo field
-      form.trigger("logo");
-    }
   };
 
   return (
@@ -299,7 +277,7 @@ const Signup = () => {
                 </div>
               )}
 
-              {/* Step 2: Company Details */}
+              {/* Step 2: Essential Company Details */}
               {currentStep === 2 && (
                 <div className="space-y-6">
                   <div className="mb-8">
@@ -308,27 +286,27 @@ const Signup = () => {
                     >
                       Company Information
                     </h2>
-                    <p className="text-gray-600">Tell us about your business</p>
+                    <p className="text-gray-600">Essential business details to get started</p>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="companyName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Company Name *</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter company name"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                  <FormField
+                    control={form.control}
+                    name="companyName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel required>Company Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Enter company name"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
+                  <div className="grid md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
                       name="businessType"
@@ -358,173 +336,9 @@ const Signup = () => {
                         </FormItem>
                       )}
                     />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="registrationNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Registration Number</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter registration number"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
 
                     <FormField
-                      control={form.control}
-                      name="tinNumber"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>TIN Number *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Enter TIN number" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="companyEmail"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Company Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="company@example.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phone Number</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="tel"
-                              placeholder="+233 XX XXX XXXX"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      name={"website"}
-                      control={form.control}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Website</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="url"
-                              placeholder="https://www.yourcompany.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      name={"address"}
-                      control={form.control}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Address</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Enter your business address"
-                              className="resize-none"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      name={"region"}
-                      control={form.control}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Region</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            value={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select region" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectGroup>
-                                {regions.map((region) => (
-                                  <SelectItem key={region} value={region}>
-                                    {region}
-                                  </SelectItem>
-                                ))}
-                              </SelectGroup>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      name={"gps"}
-                      control={form.control}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>GPS Coordinates</FormLabel>
-                          <FormControl>
-                            <div className="relative">
-                              <Input
-                                className="pl-10"
-                                placeholder="GPS coordinates"
-                                {...field}
-                              />
-                              <MapPin className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 pointer-events-none" />
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      name={"currency"}
+                      name="currency"
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
@@ -555,29 +369,6 @@ const Signup = () => {
                         </FormItem>
                       )}
                     />
-
-                    <FormField
-                      name={"logo"}
-                      control={form.control}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Company Logo</FormLabel>
-                          <FormControl>
-                            <FileUpload
-                              value={field.value}
-                              handleFileUpload={(e) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                  field.onChange(file);
-                                  form.trigger("logo");
-                                }
-                              }}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                   </div>
                 </div>
               )}
@@ -604,10 +395,9 @@ const Signup = () => {
                       key={index}
                       className={`
                         w-2 h-2 rounded-full transition-all
-                        ${
-                          index + 1 === currentStep
-                            ? "bg-vividskyblue"
-                            : "bg-gray-300"
+                        ${index + 1 === currentStep
+                          ? "bg-vividskyblue"
+                          : "bg-gray-300"
                         }
                       `}
                     />
