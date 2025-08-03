@@ -17,14 +17,21 @@ export const steps: Step[] = [
   },
 ];
 
-export const businessTypes = [
+export enum BusinessTypes {
   "Sole Proprietorship",
   "Partnership",
   "Limited Liability Company (LLC)",
   "Corporation",
   "Non-Profit Organization",
   "Other",
-];
+}
+
+export enum Roles {
+  Administrator,
+  Salesperson,
+  Accountant,
+  Manager
+}
 
 export const currencies = [
   { code: "GHS", name: "Ghanaian Cedi" },
@@ -45,6 +52,21 @@ export const regions = [
   "Upper West",
   "Brong Ahafo",
 ];
+
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .email("Please enter a valid email address")
+    .min(1, "Email is required"),
+
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+    ),
+})
 
 export const signupSchema = z
   .object({

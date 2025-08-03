@@ -21,7 +21,7 @@ const main = async () => {
     await db.insert(businessTypes).values([
         { name: "Sole Proprietorship", description: "Sole Proprietorship" },
         { name: "Partnership", description: "Partnership" },
-        { name: "Limited Liability Company (LLC)", description: "imited Liability Company (LLC)" },
+        { name: "Limited Liability Company (LLC)", description: "Limited Liability Company (LLC)" },
         { name: "Corporation", description: "Corporation" },
         { name: "Non-Profit Organization", description: "Non-Profit Organization" },
         { name: "Other", description: "Other" }
