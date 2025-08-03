@@ -5,7 +5,7 @@ import React from "react";
 interface Props {
  steps: Step[]
  currentStep: number
- isStepComplete: (stepId: number) => boolean | "" | undefined
+ isStepComplete: (stepId: number) => boolean | "" | 0
 }
 
 function ProgressStepper({steps, currentStep, isStepComplete}: Props) {
