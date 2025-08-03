@@ -65,21 +65,21 @@ export const regions = table("regions", {
 export const companies = table("companies", {
     id: t.integer("company_id").primaryKey().generatedAlwaysAsIdentity(),
     name: t.varchar({ length: 100 }).notNull(),
-    business_type_id: businessTypesEnum().references(() => businessTypes.id),
+    business_type_id: t.integer().references(() => businessTypes.id),
     registrationNumber: t.varchar("registration_number", { length: 100 }),
     tinNumber: t.varchar("tin_number", { length: 100 }),
     email: t.varchar({ length: 100 }),
     phone: t.varchar({ length: 100 }),
     website: t.varchar({ length: 100 }),
     address: t.varchar({ length: 100 }),
-    regionId: rolesEnum("region_id").references(() => regions.id),
+    regionId: t.integer("region_id").references(() => regions.id),
     digitalAddress: t.varchar("digital_address", { length: 100 }),
     currency: t.varchar().default("GHS"),
     timezone: t.varchar({ length: 100 }).default("GMT"),
     logo: t.text(),
     primaryColor: t.varchar("primary_color", { length: 50 }),
     isActive: t.boolean("is_active").default(false),
-    subscriptionTierId: subscriptionTiersEnum("subscription_tier_id").references(() => subscriptionTiers.id),
+    subscriptionTierId: t.integer("subscription_tier_id").references(() => subscriptionTiers.id),
     ...timestamps
 })
 
@@ -92,7 +92,7 @@ export const users = table("users", {
     avatar: t.text(),
     isActive: t.boolean("is_active").default(false),
     lastLogin: t.timestamp("last_login"),
-    roleId: rolesEnum().references(() => roles.id),
+    roleId: t.integer().references(() => roles.id),
     companyId: t.integer().references(() => companies.id),
     ...timestamps
 })
