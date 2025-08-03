@@ -79,3 +79,23 @@ export enum CustomerType {
     MANUAL_ADJUSTMENT = 3,
     STOCK_TRANSFER = 4
   }
+
+  export interface BusinessType {
+    id: number
+    name: string
+  }
+  
+  export interface Region {
+    id: number
+    name: string
+  }
+  
+  export interface SignupApiGetResponse {
+    businessType: BusinessType[]
+    region: Region[]
+  }
+  
+  export interface SignupGetData {
+    businessTypes: BusinessType[]
+    regions: Region[]
+  }
