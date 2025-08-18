@@ -1,7 +1,8 @@
+import { ApiResponse } from '@/app/auth/signup/types'
 import { NextResponse } from 'next/server'
 
 export async function POST() {
-    const response = NextResponse.json({
+    const response = NextResponse.json<ApiResponse>({
         success: true,
         message: "Logged out successfully"
     })

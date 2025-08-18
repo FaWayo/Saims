@@ -1,7 +1,7 @@
 import React from 'react'
-import { novaOval } from "@/app/fonts";
+import { novaOval } from "@/app/fonts"
 import "./logo.css"
-import { ChartNoAxesCombined } from 'lucide-react';
+import { ChartNoAxesCombined } from 'lucide-react'
 
 const Logo = (): React.ReactElement => {
 

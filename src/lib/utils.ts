@@ -1,3 +1,4 @@
+import { ApiResponse } from '@/app/auth/signup/types'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
