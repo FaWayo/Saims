@@ -1,6 +1,6 @@
-import React from "react";
-import Logo from "@/components/Logo/logo";
-import Link from "next/link";
+import React from "react"
+import Logo from "@/components/Logo/logo"
+import Link from "next/link"
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,7 +11,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
       <div className="">{children}</div>
     </main>
-  );
-};
+  )
+}
 
-export default AuthLayout;
+export default AuthLayout

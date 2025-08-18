@@ -1,28 +1,24 @@
+import { getRequest } from '@/lib/auth'
 import SignupClient from './SignUpClient'
-import { BusinessType, Region, SignupApiGetResponse, SignupGetData } from './types'
+import { ApiResponse, BusinessType, Region, SignupApiGetResponse, SignupGetData } from './types'
 
 export const dynamic = 'force-dynamic'
 
 async function getSignupData(): Promise<SignupGetData> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
-    const response = await fetch(`${baseUrl}/api/signup`, {
-      method: 'GET',
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
+    const response = await getRequest('/api/signup')
+
+    console.log(response, 'response is here get sign up data', response.body)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch signup data: ${response.status} ${response.statusText}`)
     }
 
-    const data: SignupApiGetResponse = await response.json()
-    console.log('Fetched signup data:', data)
+    const data: ApiResponse<SignupGetData> = await response.json()
+    console.log(data, 'data o', data.data?.businessTypes, data.data?.regions)
 
-    const businessTypes: BusinessType[] = Array.isArray(data.businessType) ? data.businessType : []
-    const regions: Region[] = Array.isArray(data.region) ? data.region : []
+    const businessTypes: BusinessType[] = Array.isArray(data.data?.businessTypes) ? data.data.businessTypes : []
+    const regions: Region[] = Array.isArray(data.data?.regions) ? data.data?.regions : []
 
     return {
       businessTypes,

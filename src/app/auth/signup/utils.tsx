@@ -1,6 +1,6 @@
-import { User, Building2 } from "lucide-react";
-import { Step } from "./types";
-import { z } from "zod";
+import { User, Building2 } from "lucide-react"
+import { Step } from "./types"
+import { z } from "zod"
 
 export const steps: Step[] = [
   {
@@ -15,7 +15,7 @@ export const steps: Step[] = [
     icon: Building2,
     description: "Business information",
   },
-];
+]
 
 export enum BusinessTypes {
   "Sole Proprietorship",
@@ -38,7 +38,7 @@ export const currencies = [
   { code: "USD", name: "US Dollar" },
   { code: "EUR", name: "Euro" },
   { code: "GBP", name: "British Pound" },
-];
+]
 
 export const regions = [
   "Greater Accra",
@@ -51,7 +51,7 @@ export const regions = [
   "Upper East",
   "Upper West",
   "Brong Ahafo",
-];
+]
 
 export const loginSchema = z.object({
   email: z
@@ -111,7 +111,7 @@ export const signupSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  });
+  })
 
 // Optional: Schema for completing profile after signup
 export const completeProfileSchema = z.object({
@@ -169,15 +169,15 @@ export const completeProfileSchema = z.object({
     .any()
     .optional()
     .refine((file) => {
-      if (!file) return true;
-      return file instanceof File;
+      if (!file) return true
+      return file instanceof File
     }, "Please upload a valid file")
     .refine((file) => {
-      if (!file) return true;
-      return file.size <= 10 * 1024 * 1024; // 10MB
+      if (!file) return true
+      return file.size <= 10 * 1024 * 1024 // 10MB
     }, "File size must be less than 10MB")
     .refine((file) => {
-      if (!file) return true;
-      return ["image/jpeg", "image/png", "image/svg+xml"].includes(file.type);
+      if (!file) return true
+      return ["image/jpeg", "image/png", "image/svg+xml"].includes(file.type)
     }, "Only JPEG, PNG, and SVG files are allowed"),
-});
+})
