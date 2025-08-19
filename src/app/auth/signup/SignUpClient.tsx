@@ -97,11 +97,9 @@ const Signup: React.FC<SignupClientProps> = ({ businessTypes, regions }) => {
     setIsSubmitting(true)
     setError(null)
     try {
-      console.log(data, "the data is here")
       const response = await postRequest("/api/signup", data)
 
       const responseData: ApiResponse<UserInfo> = await response.json()
-      console.log(responseData, "signup result")
 
       if (!responseData.success) {
         throw new Error(
@@ -109,7 +107,7 @@ const Signup: React.FC<SignupClientProps> = ({ businessTypes, regions }) => {
         )
       }
 
-      router.push("/dashboard")
+      router.push("/app/dashboard")
     } catch (error) {
       console.error("Signup error:", error)
       setError(

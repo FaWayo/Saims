@@ -51,6 +51,6 @@ main()
         process.exit(1)
     })
     .finally(async () => {
-        console.log("Seeding done!")
+        // console.log("Seeding done!")
         process.exit(0)
     })
