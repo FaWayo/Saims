@@ -35,20 +35,17 @@ function Login() {
   })
 
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    console.log(values, "values are here")
     setIsSubmitting(true)
     setError(null)
     try {
       const response = await postRequest("/api/login", values)
-      console.log(response, "response is here")
-
       const responseData: ApiResponse<UserInfo> = await response.json()
 
       if (!responseData.success) {
         throw new Error(responseData.error?.message || "Failed to login")
       }
 
-      router.push("/dashboard")
+      router.push("/app/dashboard")
     } catch (error) {
       console.error("Login error:", error)
       setError(

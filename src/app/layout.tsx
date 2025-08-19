@@ -1,10 +1,10 @@
-
-import './globals.css'
-import { lato } from './fonts'
-import type { Metadata } from 'next'
+import "./globals.css"
+import { lato } from "./fonts"
+import type { Metadata } from "next"
+import { UserProvider } from "@/hooks/UserContext"
 
 export const metadata: Metadata = {
-  title: 'Raffby Sales and Purchases Inventory'
+  title: "Raffby Sales and Purchases Inventory",
 }
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={lato.className}>
       <body>
-        {children}
+        <UserProvider>{children}</UserProvider>
       </body>
     </html>
   )

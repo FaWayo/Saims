@@ -4,32 +4,19 @@ import { redirect } from 'next/navigation'
 import jwt from 'jsonwebtoken'
 import Link from 'next/link'
 import Logo from '@/components/Logo/logo'
+import { UserInfo } from './auth/signup/types'
 
-interface JWTPayload {
-  userId: string
-  email: string
-  firstName: string
-  lastName: string
-  companyId: string
-  roleId: string
-  iat: number
-  exp: number
-}
 
-async function verifyAuth(): Promise<JWTPayload | null> {
+async function verifyAuth(): Promise<UserInfo | null> {
   try {
     const cookieStore = cookies()
     const token = cookieStore.get('auth-token')
-
-    console.log(token, 'token is here')
 
     if (!token) {
       return null
     }
 
-    const decoded = jwt.verify(token.value, process.env.JWT_SECRET!) as JWTPayload
-
-    console.log(decoded, 'decoded is here')
+    const decoded = jwt.verify(token.value, process.env.JWT_SECRET!) as UserInfo
 
     return decoded
   } catch (error) {
@@ -42,7 +29,7 @@ const Home = async () => {
   const user = await verifyAuth()
 
   if (user) {
-    redirect('/dashboard')
+    redirect('/app/dashboard')
   }
 
   return (
@@ -52,7 +39,7 @@ const Home = async () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-              <Link href={"/"}><Logo /></Link> 
+              <Link href={"/"} className='mt-4'><Logo /></Link> 
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -81,16 +68,10 @@ const Home = async () => {
               <span className="text-primary block">Sales & Inventory</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              The complete solution for managing your inventory, tracking sales, and growing your business.
+              A solution for managing your inventory, tracking sales, and growing your business.
               Simple, powerful, and designed for modern businesses.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* <a
-                href="/auth/signup"
-                className="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-500 transition-all transform hover:scale-105 shadow-lg"
-              >
-                Start Free Trial
-              </a> */}
               <a
                 href="#features"
                 className="border-2 border-primary text-primary px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-50 transition-colors"
