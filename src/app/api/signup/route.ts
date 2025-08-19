@@ -46,8 +46,6 @@ export async function POST(request: NextRequest) {
 
     const hashedPassword = await bcrypt.hash(validatedData.password, 12)
 
-    console.log(hashedPassword, "hashed password", validatedData)
-
     const result = await db.transaction(async (tx) => {
       const newCompany: NewCompany = {
         name: validatedData.companyName,

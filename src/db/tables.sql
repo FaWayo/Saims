@@ -1,6 +1,3 @@
--- Create database schema for PostgreSQL
-
--- Users table
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -16,7 +13,6 @@ CREATE TABLE users (
     updated_at TIMESTAMP
 );
 
--- Roles table
 CREATE TABLE roles (
     role_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -27,26 +23,22 @@ CREATE TABLE roles (
     updated_at TIMESTAMP
 );
 
--- Subscription tiers table
 CREATE TABLE subscription_tiers (
     subscription_tier_id SERIAL PRIMARY KEY,
     name VARCHAR(100)
 );
 
--- Regions table
 CREATE TABLE regions (
     region_id SERIAL PRIMARY KEY,
     name VARCHAR(250) NOT NULL
 );
 
--- Business types table
 CREATE TABLE business_types (
     business_type_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT
 );
 
--- Companies table
 CREATE TABLE companies (
     company_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -69,19 +61,16 @@ CREATE TABLE companies (
     updated_at TIMESTAMP
 );
 
--- Units table
 CREATE TABLE units (
     unit_id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Categories table
 CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL
 );
 
--- Products table
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -124,7 +113,6 @@ CREATE TABLE products (
     company_id INTEGER
 );
 
--- Suppliers table
 CREATE TABLE suppliers (
     supplier_id SERIAL PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
@@ -142,7 +130,6 @@ CREATE TABLE suppliers (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Customers table
 CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
     name VARCHAR(200),
@@ -158,7 +145,6 @@ CREATE TABLE customers (
     company_id INTEGER
 );
 
--- Purchase orders table
 CREATE TABLE purchase_orders (
     p_order_id SERIAL PRIMARY KEY,
     p_order_num VARCHAR(100) UNIQUE NOT NULL,
@@ -176,7 +162,6 @@ CREATE TABLE purchase_orders (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Purchase items table
 CREATE TABLE purchase_items (
     p_item_id SERIAL PRIMARY KEY,
     product_id INTEGER NOT NULL,
@@ -189,7 +174,6 @@ CREATE TABLE purchase_items (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Sales orders table
 CREATE TABLE sales_orders (
     s_order_id SERIAL PRIMARY KEY,
     s_order_num VARCHAR(100) UNIQUE NOT NULL,
@@ -208,7 +192,6 @@ CREATE TABLE sales_orders (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Sale items table
 CREATE TABLE sale_items (
     s_item_id SERIAL PRIMARY KEY,
     s_order_id INTEGER NOT NULL,
@@ -222,7 +205,6 @@ CREATE TABLE sale_items (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Inventory logs table
 CREATE TABLE inventory_logs (
     log_id SERIAL PRIMARY KEY,
     product_id INTEGER NOT NULL,
@@ -241,7 +223,6 @@ CREATE TABLE inventory_logs (
     company_id INTEGER NOT NULL
 );
 
--- Add foreign key constraints
 ALTER TABLE users ADD CONSTRAINT fk_users_role FOREIGN KEY (role_id) REFERENCES roles(role_id);
 ALTER TABLE users ADD CONSTRAINT fk_users_company FOREIGN KEY (company_id) REFERENCES companies(company_id);
 
@@ -276,7 +257,7 @@ ALTER TABLE sale_items ADD CONSTRAINT fk_sale_items_product FOREIGN KEY (product
 ALTER TABLE inventory_logs ADD CONSTRAINT fk_inventory_logs_product FOREIGN KEY (product_id) REFERENCES products(product_id);
 ALTER TABLE inventory_logs ADD CONSTRAINT fk_inventory_logs_company FOREIGN KEY (company_id) REFERENCES companies(company_id);
 
--- indexes
+
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_company ON users(company_id);
 CREATE INDEX idx_products_company ON products(company_id);
