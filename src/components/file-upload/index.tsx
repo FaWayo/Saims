@@ -1,10 +1,10 @@
-import { Upload } from "lucide-react";
-import React from "react";
+import { Upload } from "lucide-react"
+import React from "react"
 
 interface Props {
-  title?: string;
-  value: File | null;
-  handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  title?: string
+  value: File | null
+  handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void
   maxSize?: number
   accept?: string
 }
@@ -46,7 +46,7 @@ function FileUpload({ title, value, handleFileUpload, maxSize, accept }: Props) 
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default FileUpload;
+export default FileUpload

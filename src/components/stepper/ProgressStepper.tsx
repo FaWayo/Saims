@@ -1,6 +1,6 @@
-import { Step } from "@/app/auth/signup/types";
-import { Check } from "lucide-react";
-import React from "react";
+import { Step } from "@/app/auth/signup/types"
+import { Check } from "lucide-react"
+import React from "react"
 
 interface Props {
  steps: Step[]
@@ -13,9 +13,9 @@ function ProgressStepper({steps, currentStep, isStepComplete}: Props) {
     <div className="mb-5">
       <div className="flex items-center justify-center">
         {steps.map((step, index) => {
-          const Icon = step.icon;
-          const isActive = currentStep === step.id;
-          const isCompleted = currentStep > step.id || isStepComplete(step.id);
+          const Icon = step.icon
+          const isActive = currentStep === step.id
+          const isCompleted = currentStep > step.id || isStepComplete(step.id)
 
           return (
             <div key={step.id} className="flex items-center">
@@ -61,11 +61,11 @@ function ProgressStepper({steps, currentStep, isStepComplete}: Props) {
                 />
               )}
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
+  )
 }
 
-export default ProgressStepper;
+export default ProgressStepper

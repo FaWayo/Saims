@@ -1,15 +1,11 @@
 "use client"
+import { postRequest } from '@/lib/auth'
 import React from 'react'
 
 function Dashboard() {
   const handleLogout = async () => {
     try {
-      const response = await fetch('/api/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      const response = await postRequest('/api/logout')
 
       if (response.ok) {
         window.location.href = '/'

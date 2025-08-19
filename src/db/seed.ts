@@ -1,7 +1,7 @@
 
-import { Pool } from "pg";
-import { roles, businessTypes, subscriptionTiers, regions } from "./schema/auth";
-import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg"
+import { roles, businessTypes, subscriptionTiers, regions } from "./schema/auth"
+import { drizzle } from "drizzle-orm/node-postgres"
 
 const main = async () => {
 
@@ -9,14 +9,14 @@ const main = async () => {
         connectionString: process.env.DATABASE_URL
     })
 
-    const db = drizzle({ client: pool });
+    const db = drizzle({ client: pool })
 
     await db.insert(roles).values([
         { name: "Administrator", description: "Administrator", isActive: true },
         { name: "Salesperson", description: "Salesperson", isActive: true },
         { name: "Accountant", description: "Accountant", isActive: true },
         { name: "Manager", description: "Manager", isActive: true }
-    ]);
+    ])
 
     await db.insert(businessTypes).values([
         { name: "Sole Proprietorship", description: "Sole Proprietorship" },
@@ -25,11 +25,11 @@ const main = async () => {
         { name: "Corporation", description: "Corporation" },
         { name: "Non-Profit Organization", description: "Non-Profit Organization" },
         { name: "Other", description: "Other" }
-    ]);
+    ])
 
     await db.insert(subscriptionTiers).values([
         { name: "Basic" }
-    ]);
+    ])
 
     await db.insert(regions).values([
         { name: "Greater Accra" },
@@ -43,14 +43,14 @@ const main = async () => {
         { name: "Upper West" },
         { name: "Brong Ahafo" }
     ])
-};
+}
 
 main()
     .catch((e) => {
-        console.error(e);
-        process.exit(1);
+        console.error(e)
+        process.exit(1)
     })
     .finally(async () => {
-        console.log("Seeding done!");
-        process.exit(0);
-    });
+        console.log("Seeding done!")
+        process.exit(0)
+    })
