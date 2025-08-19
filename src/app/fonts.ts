@@ -6,20 +6,20 @@ export const montserrat = Montserrat({
     subsets: ['latin'],
     variable: '--font-montserrat',
     weight: '600'
-  });
+  })
   
   export const lato = Lato({
     display: 'swap',
     weight: ['400', '700'],
     subsets: ['latin'],
     variable: '--font-lato'
-  });
+  })
   
   export const raleway = Raleway({
     display: 'swap',
     subsets: ['latin'],
     variable: '--font-raleway'
-  });
+  })
 
   export const novaOval = Nova_Oval({
     weight: '400',
