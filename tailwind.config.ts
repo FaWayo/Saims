@@ -1,4 +1,4 @@
-import colors from "tailwindcss/colors";
+import colors from "tailwindcss/colors"
 const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -32,13 +32,15 @@ const config = {
         error: "#3F57E77",
         white: "#ffffff",
         gold: "#FFD700",
-        vividskyblue: "#5BC3EB"
+        vividskyblue: "#5BC3EB",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         authbackground: "url('/assets/backgrounda.jpg')",
+        "primary-gradient":
+          "linear-gradient(135deg, #B54F0F 0%, #D16014 35%, #E8A317 100%)",
       },
       fontFamily: {
         header: ["var(--font-montserrat)"],
@@ -48,5 +50,5 @@ const config = {
     },
   },
   plugins: [],
-};
-export default config;
+}
+export default config

@@ -39,7 +39,7 @@ function Navbar() {
   ]
 
   return (
-    <nav className={`bg-primary shadow-sm border-t fixed bottom-0 left-0 right-0 w-full md:sticky py-4 md:py-6 text-white z-50 transition-all duration-300
+    <nav className={`bg-primary-gradient shadow-sm border-t fixed bottom-0 left-0 right-0 w-full md:sticky py-2 md:py-4 text-white z-20 transition-all duration-300
     ${isScrolled ? 'md:top-0' : 'md-top-16'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between md:justify-center md:gap-8">
