@@ -45,17 +45,29 @@ const AppLayout = async ({ children }: { children: React.ReactNode }) => {
 
             <div className="flex gap-4 text-gray-700">
               <button className="flex items-center gap-3">
-                <Settings color="#0D3B66" strokeWidth={3} />
+                <Settings
+                  color="#0D3B66"
+                  strokeWidth={3}
+                  className="h-4 w-4 md:h-6 md:w-6"
+                />
                 <p className="hidden md:block">Settings</p>
               </button>
               <div className="border-l border-gray-300 h-6"></div>
               <button className="flex items-center gap-3">
-                <CircleUser color="#0D3B66" strokeWidth={3} />
+                <CircleUser
+                  color="#0D3B66"
+                  strokeWidth={3}
+                  className="h-4 w-4 md:h-6 md:w-6"
+                />
                 <p className="hidden md:block">{user.firstName}</p>
               </button>
               <div className="border-l border-gray-300 h-6"></div>
               <button>
-                <Bell color="#0D3B66" strokeWidth={3} />
+                <Bell
+                  color="#0D3B66"
+                  strokeWidth={3}
+                  className="h-4 w-4 md:h-6 md:w-6"
+                />
               </button>
               <div className="border-l border-gray-300 h-6"></div>
               <LogoutButton />
