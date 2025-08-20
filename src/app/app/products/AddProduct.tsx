@@ -24,7 +24,7 @@ function AddProduct({ isOpen, setIsOpen }: Props) {
     setIsOpen(false)
   }
 
-  console.log("here", isOpen, isMobile)
+ // console.log("here", isOpen, isMobile)
 
   return (
     <>

@@ -10,7 +10,7 @@ interface Props {
 
 function BottomDrawer({ children, isOpen, onClose, title }: Props) {
 
-    console.log(isOpen, 'drawer open')
+   // console.log(isOpen, 'drawer open')
   return (
     <>
       <div
