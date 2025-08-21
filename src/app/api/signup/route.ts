@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import z from "zod/v3"
+import z from "zod"
 import { signupSchema } from "@/app/auth/signup/utils"
 import { db } from "@/db"
 import {

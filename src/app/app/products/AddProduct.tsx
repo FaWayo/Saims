@@ -1,6 +1,7 @@
 import BottomDrawer from "@/components/bottom-drawer"
 import Modal from "@/components/modal"
 import React, { useEffect, useState } from "react"
+import AddForm from "./AddForm"
 
 interface Props {
   isOpen: boolean
@@ -24,21 +25,21 @@ function AddProduct({ isOpen, setIsOpen }: Props) {
     setIsOpen(false)
   }
 
- // console.log("here", isOpen, isMobile)
+  // console.log("here", isOpen, isMobile)
 
   return (
     <>
       {/* Mobile */}
       {isMobile && isOpen && (
         <BottomDrawer onClose={handleClose} title={"Add Product"} isOpen>
-          <h2>The content is here</h2>
+          <AddForm handleClose={handleClose} />
         </BottomDrawer>
       )}
 
       {/* Desktop */}
       {isOpen && !isMobile && (
         <Modal onClose={handleClose} title={"Add Product"}>
-          <div>Content is here</div>
+          <AddForm handleClose={handleClose} />
         </Modal>
       )}
     </>

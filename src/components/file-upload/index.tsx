@@ -20,7 +20,7 @@ function FileUpload({ title, value, handleFileUpload, maxSize, accept }: Props) 
     }
   }
   return (
-    <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors">
+    <div className="mt-1 flex justify-center px-6 py-5 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors">
       <div className="space-y-1 text-center">
         <Upload className="mx-auto h-12 w-12 text-gray-400" />
         <div className="flex text-sm text-gray-600">

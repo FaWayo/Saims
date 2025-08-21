@@ -62,11 +62,12 @@ function Products() {
             >
               Add Product
             </Button>
+            
           </div>
         </div>
       </div>
 
-      {true && <AddProduct isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />}
+      {isOpenAdd && <AddProduct isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />}
     </div>
   )
 }

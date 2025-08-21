@@ -31,7 +31,7 @@ export const currenciesEnum = pgEnum("currencies", [
     "British Pound",
 ])
 
-const timestamps = {
+export const timestamps = {
     updated_at: t.timestamp(),
     created_at: t.timestamp().defaultNow().notNull()
 }
