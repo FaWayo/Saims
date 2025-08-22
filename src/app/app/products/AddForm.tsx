@@ -35,9 +35,11 @@ import { Button } from "@/components/button"
 
 interface Props {
   handleClose: () => void
+  setAddCategory: React.Dispatch<React.SetStateAction<boolean>>
+  setAddUnit: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function AddForm({ handleClose }: Props) {
+function AddForm({ handleClose, setAddCategory, setAddUnit }: Props) {
   const categories: { id: string; name: string }[] = []
 
   const units: { id: string; name: string }[] = []
@@ -52,7 +54,7 @@ function AddForm({ handleClose }: Props) {
       purchaseUnit: "",
       purchaseCost: 0,
       purchaseInitialQuantity: 0,
-      itemsPerPurchaseUnit: 1,
+      itemsPerPurchaseUnit: 0,
       sellingPrice: 0,
       sellingPriceSingleItem: undefined,
       brand: undefined,
@@ -71,7 +73,7 @@ function AddForm({ handleClose }: Props) {
       : "0.00"
 
   const onSubmit = async (data: z.infer<typeof addProductSchema>) => {
-   // console.log("Form data:", data)
+    // console.log("Form data:", data)
   }
 
   return (
@@ -103,6 +105,7 @@ function AddForm({ handleClose }: Props) {
                       />
                     </FormControl>
                     <FormDescription>
+                      <Info className="h-3 w-3" />
                       Upload a clear image of your product (optional)
                     </FormDescription>
                     <FormMessage />
@@ -116,11 +119,12 @@ function AddForm({ handleClose }: Props) {
                   name="productName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="required">Product Name</FormLabel>
+                      <FormLabel required>Product Name</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., Coca-Cola 330ml" {...field} />
                       </FormControl>
                       <FormDescription>
+                        <Info className="h-3 w-3" />
                         Be specific with size/variant if applicable
                       </FormDescription>
                       <FormMessage />
@@ -133,7 +137,19 @@ function AddForm({ handleClose }: Props) {
                   name="category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="required">Category</FormLabel>
+                      <div className="flex items-center justify-between">
+                        <FormLabel required>Category</FormLabel>
+                        <Button
+                          variant={"link"}
+                          size={"sm"}
+                          className="text-[10px] font-bold md:text-[12px]"
+                          type="button"
+                          onClick={() => setAddCategory(() => true)}
+                        >
+                          Add Category
+                        </Button>
+                      </div>
+
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
@@ -154,6 +170,7 @@ function AddForm({ handleClose }: Props) {
                         </SelectContent>
                       </Select>
                       <FormDescription>
+                        <Info className="h-3 w-3" />
                         Product category for organization
                       </FormDescription>
                       <FormMessage />
@@ -237,7 +254,18 @@ function AddForm({ handleClose }: Props) {
                   name="purchaseUnit"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="required">Purchase Unit</FormLabel>
+                      <div className="flex items-center justify-between">
+                        <FormLabel required>Purchase Unit</FormLabel>
+                        <Button
+                          variant={"link"}
+                          size={"sm"}
+                          className="text-[10px] font-bold md:text-[12px]"
+                          type="button"
+                          onClick={() => setAddUnit(() => true)}
+                        >
+                          Add Unit
+                        </Button>
+                      </div>
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
@@ -257,7 +285,7 @@ function AddForm({ handleClose }: Props) {
                           </SelectGroup>
                         </SelectContent>
                       </Select>
-                      <FormDescription className="flex items-center gap-1">
+                      <FormDescription>
                         <Info className="h-3 w-3" />
                         <span>
                           How you buy from suppliers (box, case, individual,
@@ -274,9 +302,7 @@ function AddForm({ handleClose }: Props) {
                   name="itemsPerPurchaseUnit"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="required">
-                        Items per Purchase Unit
-                      </FormLabel>
+                      <FormLabel required>Items per Purchase Unit</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g., 24 bottles per case"
@@ -288,7 +314,7 @@ function AddForm({ handleClose }: Props) {
                           }
                         />
                       </FormControl>
-                      <FormDescription className="flex items-center gap-1">
+                      <FormDescription>
                         <Info className="h-3 w-3" />
                         <span>
                           How many individual items in one purchase unit?
@@ -306,7 +332,7 @@ function AddForm({ handleClose }: Props) {
                   name="purchaseCost"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="required">Purchase Cost</FormLabel>
+                      <FormLabel required>Purchase Cost</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Cost per purchase unit"
@@ -392,9 +418,16 @@ function AddForm({ handleClose }: Props) {
                 name="sellingPrice"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="required">
-                      Selling Price (Full Unit)
-                    </FormLabel>
+                    <div className="flex items-center justify-between">
+                      <FormLabel required>Selling Price (Full Unit)</FormLabel>
+                      <Button
+                        variant={"link"}
+                        size={"sm"}
+                        className="text-[10px] font-bold md:text-[12px]"
+                      >
+                        Add Unit
+                      </Button>
+                    </div>
                     <FormControl>
                       <Input
                         placeholder="Price for entire purchase unit"
@@ -454,7 +487,7 @@ function AddForm({ handleClose }: Props) {
                     name="sellingPriceSingleItem"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="required">
+                        <FormLabel required>
                           Price per Individual Item
                         </FormLabel>
                         <FormControl>
@@ -503,7 +536,9 @@ function AddForm({ handleClose }: Props) {
             <Button variant={"outline"} type="button" onClick={handleClose}>
               Cancel
             </Button>
-            <Button type="submit">Add Product</Button>
+            <Button type="submit" variant={"primary"}>
+              Add Product
+            </Button>
           </div>
         </form>
       </Form>
