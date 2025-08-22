@@ -26,7 +26,7 @@ function AddUnitForm({ onClose }: Props) {
   }
 
   const handleSubmit = () => {
-    console.log("we will add unit here")
+    //console.log("we will add unit here")
   }
 
   return (

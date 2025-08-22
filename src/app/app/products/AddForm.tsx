@@ -522,7 +522,7 @@ function AddForm({ handleClose, setAddCategory, setAddUnit }: Props) {
                       <li>• Customers can buy the entire purchase unit</li>
                       <li>• Customers can also buy individual items</li>
                       <li>
-                        • You'll have two products in your system for the same
+                        • You&apos;ll have two products in your system for the same
                         inventory
                       </li>
                     </ul>
