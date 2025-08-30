@@ -5,19 +5,19 @@ import { companies, timestamps } from "./auth"
 
 export const categories = table("categories", {
   id: t.integer("category_id").primaryKey().generatedAlwaysAsIdentity(),
-  name: t.varchar({ length: 100 }),
+  name: t.varchar("name", { length: 100 }).notNull()
 })
 
 export const units = table("units", {
   id: t.integer("unit_id").primaryKey().generatedAlwaysAsIdentity(),
-  name: t.varchar({ length: 100 }),
+  name: t.varchar("name", { length: 100 }).notNull()
 })
 
 export const products = table("products", {
   id: t.integer("product_id").primaryKey().generatedAlwaysAsIdentity(),
-  name: t.text().notNull(),
-  description: t.text(),
-  sku: t.text().unique(),
+  name: t.text("name").notNull(),
+  description: t.text("description"),
+  sku: t.text("sku").unique(),
   barCode: t.text("bar_code"),
   categoryId: t.integer("category_id").references(() => categories.id),
   costPrice: t.decimal("cost_price", { precision: 20, scale: 2 }).notNull(),
@@ -33,20 +33,20 @@ export const products = table("products", {
   itemsPerPurchaseUnit: t.integer("items_per_purchase_unit").notNull(),
   itemsPerSaleUnit: t.integer("items_per_sale_unit").notNull(),
 
-  brand: t.varchar({ length: 100 }),
-  model: t.varchar({ length: 100 }),
-  color: t.varchar({ length: 50 }),
-  size: t.varchar({ length: 50 }),
-  weight: t.decimal({ precision: 8, scale: 3 }),
+  brand: t.varchar("brand", { length: 100 }),
+  model: t.varchar("model", { length: 100 }),
+  color: t.varchar("color", { length: 50 }),
+  size: t.varchar("size", { length: 50 }),
+  weight: t.decimal("weight", { precision: 8, scale: 3 }), 
 
-  image: t.text(),
-  thumbnail: t.text(),
+  image: t.text("image"),
+  thumbnail: t.text("thumbnail"),
 
   isActive: t.boolean("is_active").default(true),
   isService: t.boolean("is_service").default(false),
   isTaxable: t.boolean("is_taxable").default(true),
   taxRate: t.decimal("tax_rate", { precision: 5, scale: 4 }).default("0.0000"),
 
-  companyId: t.integer("company_id").references(() => companies.id),
+  companyId: t.integer("company_id").references(() => companies.id).notNull(),
   ...timestamps,
 })

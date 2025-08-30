@@ -2,7 +2,7 @@ import { pgTable as table, pgEnum } from "drizzle-orm/pg-core"
 import * as t from 'drizzle-orm/pg-core'
 
 
-export const rolesEnum = pgEnum("roles", ["Administrator", "Salesperson", "Accountant", "Manager"])
+// export const rolesEnum = pgEnum("roles", ["Administrator", "Salesperson", "Accountant", "Manager"])
 export const businessTypesEnum = pgEnum("businessTypes", [
     "Sole Proprietorship",
     "Partnership",
@@ -12,18 +12,20 @@ export const businessTypesEnum = pgEnum("businessTypes", [
     "Other",
 ])
 export const subscriptionTiersEnum = pgEnum("subscriptionTiers", ["Basic"])
-export const regionsEnum = pgEnum("regions", [
-    "Greater Accra",
-    "Ashanti",
-    "Western",
-    "Central",
-    "Eastern",
-    "Volta",
-    "Northern",
-    "Upper East",
-    "Upper West",
-    "Brong Ahafo",
-])
+
+// export const regionsEnum = pgEnum("regions", [
+//     "Greater Accra",
+//     "Ashanti",
+//     "Western",
+//     "Central",
+//     "Eastern",
+//     "Volta",
+//     "Northern",
+//     "Upper East",
+//     "Upper West",
+//     "Brong Ahafo",
+// ])
+
 export const currenciesEnum = pgEnum("currencies", [
     "Ghanaian Cedi",
     "US Dollar",
