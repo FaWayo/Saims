@@ -1,5 +1,6 @@
 import { Button } from "@/components/button"
 import { Input } from "@/components/input"
+import { postRequest } from "@/lib/auth"
 import { Plus, Trash2 } from "lucide-react"
 import React, { useState } from "react"
 
@@ -25,8 +26,11 @@ function AddUnitForm({ onClose }: Props) {
     setUnits(updated)
   }
 
-  const handleSubmit = () => {
-    //console.log("we will add unit here")
+  const handleSubmit = async () => {
+    console.log("we will add unit here", units)
+    const response = await postRequest('/api/products/units/add', units)
+
+    //if response is successful, fetch all units and use in product form dropdown
   }
 
   return (
