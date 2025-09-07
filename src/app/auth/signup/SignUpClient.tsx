@@ -98,7 +98,6 @@ const Signup: React.FC<SignupClientProps> = ({ businessTypes, regions }) => {
     setError(null)
     try {
       const response = await postRequest("/api/signup", data)
-
       const responseData: ApiResponse<UserInfo> = await response.json()
 
       if (!responseData.success) {

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react"
 import AddForm from "./AddForm"
 import CategoryForm from "./AddCategoryForm"
 import AddUnitForm from "./AddUnitForm"
+import { getRequest } from "@/lib/auth"
+import { ApiResponse } from "@/app/auth/signup/types"
 
 interface Props {
   isOpen: boolean
@@ -14,6 +16,8 @@ function AddProduct({ isOpen, setIsOpen }: Props) {
   const [isMobile, setIsMobile] = useState(false)
   const [onAddCategory, setOnAddCategory] = useState(false)
   const [onAddUnit, setOnAddUnit] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [units, setUnits] = useState<{ id: string; name: string }>([])
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -35,6 +39,27 @@ function AddProduct({ isOpen, setIsOpen }: Props) {
 
   const handleCloseUnit = () => {
     setOnAddUnit(false)
+  }
+
+  const fetchUnits = async () => {
+    setIsOpen(false)
+    try {
+      const response = await getRequest("api/units")
+      const resdata: ApiResponse = await response.json()
+
+      //const data: { id: string; name: String } = resdata
+      //setUnits(data)
+
+      console.log(resdata, 'umites res')
+
+      if (!resdata.success) {
+        throw new Error(resdata.error?.message || "Failed to get units")
+      }
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "An unexpected error occurred"
+      )
+    }
   }
   // console.log("here", isOpen, isMobile)
 
@@ -70,7 +95,7 @@ function AddProduct({ isOpen, setIsOpen }: Props) {
 
       {onAddUnit && (
         <Modal onClose={handleCloseUnit} title={"Add Units"}>
-          <AddUnitForm onClose={handleCloseUnit} />
+          <AddUnitForm onClose={handleCloseUnit} onSubmit={fetchUnits} />
         </Modal>
       )}
     </>

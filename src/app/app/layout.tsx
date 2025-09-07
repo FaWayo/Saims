@@ -10,6 +10,7 @@ import jwt from "jsonwebtoken"
 import { redirect } from "next/navigation"
 import Navbar from "@/components/navbar/Navbar"
 import LogoutButton from "@/components/LogoutButton"
+import { Toaster } from "sonner"
 
 async function verifyAuth(): Promise<UserInfo | null> {
   try {
