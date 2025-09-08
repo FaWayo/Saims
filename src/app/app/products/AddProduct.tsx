@@ -17,7 +17,7 @@ function AddProduct({ isOpen, setIsOpen }: Props) {
   const [onAddCategory, setOnAddCategory] = useState(false)
   const [onAddUnit, setOnAddUnit] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [units, setUnits] = useState<{ id: string; name: string }>([])
+  const [units, setUnits] = useState<{ id: string; name: string }[]>([])
 
   useEffect(() => {
     const checkScreenSize = () => {
